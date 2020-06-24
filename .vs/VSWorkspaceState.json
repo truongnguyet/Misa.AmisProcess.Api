@@ -3,7 +3,7 @@
     "",
     "\\MisaWebApi",
     "\\MisaWebApi\\Controllers",
-    "\\MisaWebApi\\Models"
+    "\\MisaWebApi\\Entities"
   ],
   "SelectedNode": "\\MisaWebApi\\Controllers\\UsersController.cs",
   "PreviewInSolutionExplorer": false

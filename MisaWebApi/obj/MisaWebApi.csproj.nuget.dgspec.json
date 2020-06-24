@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ttnguyet\\source\\repos\\Misa.AmisProcess.Api\\MisaWebApi\\MisaWebApi.csproj": {}
+    "E:\\ttnguyet\\source\\Misa.AmisProcess.Api\\MisaWebApi\\MisaWebApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ttnguyet\\source\\repos\\Misa.AmisProcess.Api\\MisaWebApi\\MisaWebApi.csproj": {
+    "E:\\ttnguyet\\source\\Misa.AmisProcess.Api\\MisaWebApi\\MisaWebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ttnguyet\\source\\repos\\Misa.AmisProcess.Api\\MisaWebApi\\MisaWebApi.csproj",
+        "projectUniqueName": "E:\\ttnguyet\\source\\Misa.AmisProcess.Api\\MisaWebApi\\MisaWebApi.csproj",
         "projectName": "MisaWebApi",
-        "projectPath": "C:\\Users\\ttnguyet\\source\\repos\\Misa.AmisProcess.Api\\MisaWebApi\\MisaWebApi.csproj",
+        "projectPath": "E:\\ttnguyet\\source\\Misa.AmisProcess.Api\\MisaWebApi\\MisaWebApi.csproj",
         "packagesPath": "C:\\Users\\ttnguyet\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ttnguyet\\source\\repos\\Misa.AmisProcess.Api\\MisaWebApi\\obj\\",
+        "outputPath": "E:\\ttnguyet\\source\\Misa.AmisProcess.Api\\MisaWebApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ttnguyet\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -47,6 +47,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[3.1.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.5, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -93,7 +97,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

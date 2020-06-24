@@ -9,6 +9,7 @@ using MisaWebApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using MisaWebApi.Models;
 
 namespace MisaWebApi
 {

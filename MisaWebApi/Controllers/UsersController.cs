@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 namespace MisaWebApi.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -24,24 +24,24 @@ namespace MisaWebApi.Controllers
         }
 
 
-        [AllowAnonymous]
-        [HttpPost("login")]
-        public  IActionResult Login(Users model)
-        {
+        //[AllowAnonymous]
+        //[HttpPost("login")]
+        //public  IActionResult Login(Users model)
+        //{
 
-            var user = _userService.Authenticate(model.username, model.password);
-            //var users = _context.Users.ToListAsync();
+        //    //  var user = _userService.Authenticate(model.username, model.password);
+        //    //var users = _context.Users.ToListAsync();
 
-            //var result = await (from p in users
-            //         where (p.username == model.username && p.password == model.password)
-            //         select p
-            //              )
-            //             .ToListAsync();
+        //    //var result = await (from p in users
+        //    //         where (p.username == model.username && p.password == model.password)
+        //    //         select p
+        //    //              )
+        //    //             .ToListAsync();
 
-            if (user == null)
-                return BadRequest(new { message = "username or password is incorrect" });
-            return Ok(user);
-        }
+        //    //if (user == null)
+        //    //    return BadRequest(new { message = "username or password is incorrect" });
+        //    return "Hello";
+        //}
 
         // GET: api/Users
        
@@ -57,7 +57,6 @@ namespace MisaWebApi.Controllers
         {
             return await _context.Users.ToListAsync();
         }
-
 
 
     }
