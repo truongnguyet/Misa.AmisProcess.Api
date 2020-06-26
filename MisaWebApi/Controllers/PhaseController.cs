@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MisaWebApi.Models;
+using System.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 namespace MisaWebApi.Controllers
 {
@@ -18,19 +20,14 @@ namespace MisaWebApi.Controllers
         {
             _context = context;
         }
-        // GET: api/Phase
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+      
 
         // GET: api/Phase/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Phase>> GetPhaseId(int id)
         {
-            var phase = await _context.Phase.FindAsync(id);
 
+            var phase = await _context.Phase.FindAsync(id);
             if (phase == null)
             {
                 return NotFound();
@@ -66,15 +63,37 @@ namespace MisaWebApi.Controllers
         }
 
         // PUT: api/Phase/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("edit/{id}")]
+        public async Task<ActionResult<Phase>> Put(int id, [FromBody]Phase model)
         {
+
+            var item = await _context.Phase.FirstOrDefaultAsync(x => x.Id.Equals(id));
+        
+            if (item == null) return NotFound();
+
+            item.PhaseName = model.PhaseName;
+            item.Icon = model.Icon;
+            item.Description = model.Description;
+            item.LimitUser = model.LimitUser;
+            
+            await _context.SaveChangesAsync();
+            return item;
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<Phase>> DeleteTodoItem(int id)
         {
+            var todoItem = await _context.Phase.FindAsync(id);
+            if (todoItem == null)
+            {
+                return NotFound();
+            }
+
+            _context.Phase.Remove(todoItem);
+            await _context.SaveChangesAsync();
+
+            return todoItem;
         }
     }
 }

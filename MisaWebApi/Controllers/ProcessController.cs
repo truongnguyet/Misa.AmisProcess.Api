@@ -33,8 +33,8 @@ namespace MisaWebApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Process>> GetProcessId(int id)
         {
-            var todoItem = await _context.Process.FindAsync(id);
 
+            var todoItem = await _context.Process.FindAsync(id);
             if (todoItem == null)
             {
                 return NotFound();
@@ -42,6 +42,23 @@ namespace MisaWebApi.Controllers
 
             return todoItem;
         }
+
+        //Get ca phase
+        //[HttpGet("phase/{id}")]
+        //public async Task<ActionResult<Process>> GetProcess(int id)
+        //{
+        //    var todoItem = from p in _context.Process
+        //                   join ph in _context.Phase
+        //                   on p.Id equals ph.ProcessId
+        //                   select new Process
+        //                   {
+        //                       Id = p.Id
+        //                   };
+        //    return todoItem;
+
+            
+
+        //}
 
         // POST: api/Process
         [HttpPost("create")]
@@ -69,20 +86,24 @@ namespace MisaWebApi.Controllers
 
         // PUT: api/Process/5
 
-        [HttpPut("edit/{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody]Process model)
+        [HttpPut("edit")]
+        public async Task<ActionResult<Process>> Put([FromBody]Process model)
         {
 
-            var item = await _context.Process.FirstOrDefaultAsync(x => x.Id.Equals(id));
+            var item = await _context.Process.FirstOrDefaultAsync(x => x.Id.Equals(model.Id));
 
             if (item == null) return NotFound();
-
             item.NameProcess = model.NameProcess;
             item.Status = model.Status;
 
+            _context.Process.Update(item);
+            _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return NoContent();
+            return item;
+
         }
+
+
 
         // DELETE:Process/5
         [HttpDelete("{id}")]

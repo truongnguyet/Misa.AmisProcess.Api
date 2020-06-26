@@ -19,6 +19,8 @@ namespace MisaWebApi.Models
         public string Address { get; set; }
         public string Position { get; set; }
         public string Role { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public string Password { get; set; }
 
         public virtual ICollection<UsersHasProcess> UsersHasProcess { get; set; }
     }
