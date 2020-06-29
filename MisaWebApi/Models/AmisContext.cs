@@ -173,11 +173,11 @@ namespace MisaWebApi.Models
 
             modelBuilder.Entity<Process>(entity =>
             {
-                entity.HasIndex(e => e.id)
+                entity.HasIndex(e => e.Id)
                     .HasName("id_UNIQUE")
                     .IsUnique();
 
-                entity.Property(e => e.id)
+                entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
 

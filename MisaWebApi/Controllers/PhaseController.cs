@@ -36,6 +36,16 @@ namespace MisaWebApi.Controllers
             return phase;
         }
 
+        //GET ca field
+        [HttpGet("{id}/get")]
+         
+        public ActionResult<Phase> Get(int id)
+        {
+            var item = _context.Phase.Where(c => c.Id == id)
+                .Include(d => d.FieldData)
+                .FirstOrDefault();
+            return item;
+        }
         // POST: /Phase
         [HttpPost("create")]
         public async Task<ActionResult<Phase>> CreateTodoItem(Phase phase)
@@ -61,6 +71,7 @@ namespace MisaWebApi.Controllers
                 new { id = newPhase.Id },
                 newPhase);
         }
+     
 
         // PUT: api/Phase/5
         [HttpPut("edit/{id}")]

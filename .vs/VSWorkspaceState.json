@@ -5,6 +5,6 @@
     "\\MisaWebApi\\Controllers",
     "\\MisaWebApi\\Entities"
   ],
-  "SelectedNode": "\\MisaWebApi\\Controllers\\UsersController.cs",
+  "SelectedNode": "\\MisaWebApi\\Controllers\\PhaseController.cs",
   "PreviewInSolutionExplorer": false
 }

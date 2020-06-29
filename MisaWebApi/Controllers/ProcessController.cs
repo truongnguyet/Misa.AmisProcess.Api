@@ -44,21 +44,32 @@ namespace MisaWebApi.Controllers
         }
 
         //Get ca phase
-        //[HttpGet("phase/{id}")]
-        //public async Task<ActionResult<Process>> GetProcess(int id)
-        //{
-        //    var todoItem = from p in _context.Process
-        //                   join ph in _context.Phase
-        //                   on p.Id equals ph.ProcessId
-        //                   select new Process
-        //                   {
-        //                       Id = p.Id
-        //                   };
-        //    return todoItem;
+        [HttpGet("phase/{id}")]
+        public ActionResult<Process> GetProcess(int id)
+        {
 
-            
+            var item = _context.Process.Where(p => p.Id == id)
+                .Include(c => c.Phase)
+                .FirstOrDefault();
 
-        //}
+
+            return item;
+
+        }
+
+        //Get ca phase va field
+        [HttpGet("{id}/get")]
+        public ActionResult<Process> Get (int id)
+        {
+            var item = _context.Process.Where(p => p.Id == id)
+                .Include(ph => ph.Phase)
+                .ThenInclude(c => c.FieldData)
+                .ThenInclude(o => o.Option)
+                .FirstOrDefault();
+           
+
+            return item;
+        }
 
         // POST: api/Process
         [HttpPost("create")]
