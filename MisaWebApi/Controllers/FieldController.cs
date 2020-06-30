@@ -22,10 +22,11 @@ namespace MisaWebApi.Controllers
 
         // GET: api/Field/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<FieldData>> GetFieldId(int id)
+        public  ActionResult<FieldData> GetFieldId(int id)
         {
 
-            var field = await _context.FieldData.FindAsync(id);
+            var field =  _context.FieldData.Include(a => a.Option).Where(p => p.Id == id).FirstOrDefault();
+
             if (field == null)
             {
                 return NotFound();
@@ -76,16 +77,18 @@ namespace MisaWebApi.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<FieldData>> DeleteTodoItem(int id)
+        public  ActionResult<FieldData> DeleteTodoItem(int id)
         {
-            var todoItem = await _context.FieldData.FindAsync(id);
+            var todoItem = _context.FieldData.Where(c => c.Id == id).FirstOrDefault();
             if (todoItem == null)
             {
                 return NotFound();
             }
+            var item = _context.Option.Where(d => d.FieldDataId == todoItem.Id).ToList();
 
+            _context.Option.RemoveRange(item);
             _context.FieldData.Remove(todoItem);
-            await _context.SaveChangesAsync();
+             _context.SaveChangesAsync();
 
             return todoItem;
         }
