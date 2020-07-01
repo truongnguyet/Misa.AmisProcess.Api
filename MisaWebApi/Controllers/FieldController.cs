@@ -22,7 +22,7 @@ namespace MisaWebApi.Controllers
 
         // GET: api/Field/5
         [HttpGet("{id}")]
-        public  ActionResult<FieldData> GetFieldId(int id)
+        public  ActionResult<FieldData> GetFieldId(string id)
         {
 
             var field =  _context.FieldData.Include(a => a.Option).Where(p => p.Id == id).FirstOrDefault();
@@ -60,7 +60,7 @@ namespace MisaWebApi.Controllers
 
         // PUT: api/Field/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<FieldData>> Put(int id, [FromBody]FieldData model)
+        public async Task<ActionResult<FieldData>> Put(string id, [FromBody]FieldData model)
         {
 
             var item = await _context.FieldData.FirstOrDefaultAsync(x => x.Id.Equals(id));
@@ -77,7 +77,7 @@ namespace MisaWebApi.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public  ActionResult<FieldData> DeleteTodoItem(int id)
+        public  ActionResult<FieldData> DeleteTodoItem(string id)
         {
             var todoItem = _context.FieldData.Where(c => c.Id == id).FirstOrDefault();
             if (todoItem == null)

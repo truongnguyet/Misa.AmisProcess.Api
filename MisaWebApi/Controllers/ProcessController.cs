@@ -31,7 +31,7 @@ namespace MisaWebApi.Controllers
 
         // GET: Process/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Process>> GetProcessId(int id)
+        public async Task<ActionResult<Process>> GetProcessId(Guid id)
         {
 
             var todoItem = await _context.Process.FindAsync(id);
@@ -45,29 +45,26 @@ namespace MisaWebApi.Controllers
 
         //Get ca phase
         [HttpGet("phase/{id}")]
-        public ActionResult<Process> GetProcess(int id)
+        public ActionResult<Process> GetProcess(string id)
         {
 
             var item = _context.Process.Where(p => p.Id == id)
                 .Include(c => c.Phase)
                 .FirstOrDefault();
-
-
             return item;
 
         }
 
         //Get ca phase va field
         [HttpGet("{id}/get")]
-        public ActionResult<Process> Get (int id)
+        public ActionResult<Process> Get (string id)
         {
-            var item = _context.Process.Where(p => p.Id == id)
+            var item = _context.Process.Where(p => p.Id.Equals(id))
                 .Include(ph => ph.Phase)
                 .ThenInclude(c => c.FieldData)
                 .ThenInclude(o => o.Option)
-                .FirstOrDefault();
+                .SingleOrDefault();
            
-
             return item;
         }
 
@@ -77,6 +74,7 @@ namespace MisaWebApi.Controllers
         {
             var todoItem = new Process
             {
+                Id = process.Id,
                 NameProcess = process.NameProcess,
                 Status = process.Status,
                 CreatedAt = process.CreatedAt,
@@ -95,7 +93,7 @@ namespace MisaWebApi.Controllers
                 todoItem);
         }
 
-        // PUT: api/Process/5
+        // PUT
 
         [HttpPut("edit")]
         public async Task<ActionResult<Process>> Put([FromBody]Process model)
@@ -118,7 +116,7 @@ namespace MisaWebApi.Controllers
 
         // DELETE:Process/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Process>> DeleteTodoItem(int id)
+        public async Task<ActionResult<Process>> DeleteTodoItem(string id)
         {
             var todoItem = await _context.Process.FindAsync(id);
             if (todoItem == null)
@@ -131,7 +129,7 @@ namespace MisaWebApi.Controllers
 
             return todoItem;
         }
-        private bool ProcessExist(int id) =>
+        private bool ProcessExist(string id) =>
        _context.Process.Any(e => e.Id == id);
 
     }

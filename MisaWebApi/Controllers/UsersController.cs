@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MisaWebApi.Controllers
 {
-    [Authorize]
+   // [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -53,7 +53,7 @@ namespace MisaWebApi.Controllers
         }
 
         [HttpGet("getUser")]
-        public async Task<ActionResult<IEnumerable>> GetProducts()
+        public async Task<ActionResult<IEnumerable>> GetUsers()
         {
             return await _context.Users.ToListAsync();
         }

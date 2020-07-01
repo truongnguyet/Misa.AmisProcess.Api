@@ -8,9 +8,10 @@ namespace MisaWebApi.Models
         public Phase()
         {
             FieldData = new HashSet<FieldData>();
+            UsersHasPhase = new HashSet<UsersHasPhase>();
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string PhaseName { get; set; }
         public string Icon { get; set; }
         public string Description { get; set; }
@@ -18,10 +19,10 @@ namespace MisaWebApi.Models
         public byte IsTc { get; set; }
         public byte IsTb { get; set; }
         public byte LimitUser { get; set; }
-        public int ProcessId { get; set; }
-      
+        public string ProcessId { get; set; }
 
         public virtual Process Process { get; set; }
         public virtual ICollection<FieldData> FieldData { get; set; }
+        public virtual ICollection<UsersHasPhase> UsersHasPhase { get; set; }
     }
 }

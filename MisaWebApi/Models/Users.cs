@@ -7,10 +7,11 @@ namespace MisaWebApi.Models
     {
         public Users()
         {
+            UsersHasPhase = new HashSet<UsersHasPhase>();
             UsersHasProcess = new HashSet<UsersHasProcess>();
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string FullName { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
@@ -22,6 +23,7 @@ namespace MisaWebApi.Models
         public DateTime DateOfBirth { get; set; }
         public string Password { get; set; }
 
+        public virtual ICollection<UsersHasPhase> UsersHasPhase { get; set; }
         public virtual ICollection<UsersHasProcess> UsersHasProcess { get; set; }
     }
 }

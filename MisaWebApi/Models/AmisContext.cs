@@ -20,6 +20,7 @@ namespace MisaWebApi.Models
         public virtual DbSet<Phase> Phase { get; set; }
         public virtual DbSet<Process> Process { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<UsersHasPhase> UsersHasPhase { get; set; }
         public virtual DbSet<UsersHasProcess> UsersHasProcess { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -45,7 +46,8 @@ namespace MisaWebApi.Models
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasColumnType("int(11)");
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Description)
                     .IsRequired()
@@ -60,8 +62,10 @@ namespace MisaWebApi.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.PhaseId)
+                    .IsRequired()
                     .HasColumnName("phase_id")
-                    .HasColumnType("int(11)");
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Required)
                     .HasColumnName("required")
@@ -93,11 +97,14 @@ namespace MisaWebApi.Models
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasColumnType("int(11)");
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.FieldDataId)
+                    .IsRequired()
                     .HasColumnName("fieldData_id")
-                    .HasColumnType("int(11)");
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Value)
                     .HasColumnName("value")
@@ -124,7 +131,8 @@ namespace MisaWebApi.Models
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasColumnType("int(11)");
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Description)
                     .IsRequired()
@@ -161,8 +169,10 @@ namespace MisaWebApi.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.ProcessId)
+                    .IsRequired()
                     .HasColumnName("Process_id")
-                    .HasColumnType("int(11)");
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.Process)
                     .WithMany(p => p.Phase)
@@ -179,7 +189,8 @@ namespace MisaWebApi.Models
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasColumnType("int(11)");
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.CreatedAt)
                     .HasColumnName("createdAt")
@@ -223,7 +234,8 @@ namespace MisaWebApi.Models
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasColumnType("int(11)");
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Address)
                     .IsRequired()
@@ -284,6 +296,42 @@ namespace MisaWebApi.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<UsersHasPhase>(entity =>
+            {
+                entity.HasKey(e => new { e.UsersId, e.PhaseId })
+                    .HasName("PRIMARY");
+
+                entity.ToTable("users_has_phase");
+
+                entity.HasIndex(e => e.PhaseId)
+                    .HasName("fk_users_has_phase_phase1_idx");
+
+                entity.HasIndex(e => e.UsersId)
+                    .HasName("fk_users_has_phase_users1_idx");
+
+                entity.Property(e => e.UsersId)
+                    .HasColumnName("users_id")
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PhaseId)
+                    .HasColumnName("phase_id")
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Phase)
+                    .WithMany(p => p.UsersHasPhase)
+                    .HasForeignKey(d => d.PhaseId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_users_has_phase_phase1");
+
+                entity.HasOne(d => d.Users)
+                    .WithMany(p => p.UsersHasPhase)
+                    .HasForeignKey(d => d.UsersId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_users_has_phase_users1");
+            });
+
             modelBuilder.Entity<UsersHasProcess>(entity =>
             {
                 entity.HasKey(e => new { e.UsersId, e.ProcessId })
@@ -299,11 +347,13 @@ namespace MisaWebApi.Models
 
                 entity.Property(e => e.UsersId)
                     .HasColumnName("users_id")
-                    .HasColumnType("int(11)");
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.ProcessId)
                     .HasColumnName("Process_id")
-                    .HasColumnType("int(11)");
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.Process)
                     .WithMany(p => p.UsersHasProcess)

@@ -11,7 +11,7 @@ namespace MisaWebApi.Models
             UsersHasProcess = new HashSet<UsersHasProcess>();
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string NameProcess { get; set; }
         public string Status { get; set; }
         public string CreatedBy { get; set; }
