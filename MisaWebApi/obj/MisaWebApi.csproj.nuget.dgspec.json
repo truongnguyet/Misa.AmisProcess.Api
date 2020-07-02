@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\ttnguyet\\source\\Misa.AmisProcess.Api\\MisaWebApi\\MisaWebApi.csproj": {}
+    "D:\\MISA\\source\\Misa.AmisProcess.Api\\MisaWebApi\\MisaWebApi.csproj": {}
   },
   "projects": {
-    "E:\\ttnguyet\\source\\Misa.AmisProcess.Api\\MisaWebApi\\MisaWebApi.csproj": {
+    "D:\\MISA\\source\\Misa.AmisProcess.Api\\MisaWebApi\\MisaWebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\ttnguyet\\source\\Misa.AmisProcess.Api\\MisaWebApi\\MisaWebApi.csproj",
+        "projectUniqueName": "D:\\MISA\\source\\Misa.AmisProcess.Api\\MisaWebApi\\MisaWebApi.csproj",
         "projectName": "MisaWebApi",
-        "projectPath": "E:\\ttnguyet\\source\\Misa.AmisProcess.Api\\MisaWebApi\\MisaWebApi.csproj",
-        "packagesPath": "C:\\Users\\ttnguyet\\.nuget\\packages\\",
-        "outputPath": "E:\\ttnguyet\\source\\Misa.AmisProcess.Api\\MisaWebApi\\obj\\",
+        "projectPath": "D:\\MISA\\source\\Misa.AmisProcess.Api\\MisaWebApi\\MisaWebApi.csproj",
+        "packagesPath": "C:\\Users\\NguyetMoon\\.nuget\\packages\\",
+        "outputPath": "D:\\MISA\\source\\Misa.AmisProcess.Api\\MisaWebApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ttnguyet\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\NguyetMoon\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -97,7 +97,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
         }
       }
     }
