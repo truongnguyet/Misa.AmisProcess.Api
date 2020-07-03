@@ -76,14 +76,10 @@ namespace MisaWebApi.Controllers
         }
 
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public  ActionResult<FieldData> DeleteTodoItem(string id)
+        [HttpDelete]
+        public  ActionResult<FieldData> DeleteTodoItem([FromBody] FieldData field)
         {
-            var todoItem = _context.FieldData.Where(c => c.Id == id).FirstOrDefault();
-            if (todoItem == null)
-            {
-                return NotFound();
-            }
+            var todoItem = _context.FieldData.Where(a => a.Id.Equals(field.Id)).SingleOrDefault();
             var item = _context.Option.Where(d => d.FieldDataId == todoItem.Id).ToList();
 
             _context.Option.RemoveRange(item);
