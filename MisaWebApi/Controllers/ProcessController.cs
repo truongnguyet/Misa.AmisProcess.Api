@@ -28,34 +28,25 @@ namespace MisaWebApi.Controllers
             return await _context.Process.ToListAsync();
         }
 
-
-        // GET: Process/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Process>> GetProcessId(Guid id)
+        //Phân trang
+        [HttpGet("page/{index}")]
+        public ActionResult<Page> getProcessPagination(int index)
         {
-
-            var todoItem = await _context.Process.FindAsync(id);
-            if (todoItem == null)
+            var perPage = 10;
+            var countDetails = _context.Process.Count();
+            var item = _context.Process.Skip(perPage * index).Take(perPage).ToList();
+            var result = new Page
             {
-                return NotFound();
-            }
-
-            return todoItem;
+                Count = countDetails,
+                PageIndex = index,
+                PageSize = perPage,
+                Items = item
+            };
+          
+            return result;
         }
 
-        //Get ca phase
-        [HttpGet("phase/{id}")]
-        public ActionResult<Process> GetProcess(string id)
-        {
-
-            var item = _context.Process.Where(p => p.Id == id)
-                .Include(c => c.Phase)
-                .FirstOrDefault();
-            return item;
-
-        }
-
-        //Get ca phase va field
+        //Get ca phase va field,user
         [HttpGet("{id}/get")]
         public ActionResult<Process> Get (string id)
         {
@@ -64,7 +55,12 @@ namespace MisaWebApi.Controllers
                 .ThenInclude(c => c.FieldData)
                 .ThenInclude(o => o.Option)
                 .SingleOrDefault();
-           
+            
+            foreach( var a in item.Phase)
+            {
+                var users = _context.UsersHasPhase.Where(b => b.PhaseId == a.Id).ToArray();
+                a.UsersHasPhase = users;
+            }
             return item;
         }
 
@@ -88,7 +84,7 @@ namespace MisaWebApi.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(
-                nameof(GetProcessId),
+                nameof(Get),
                 new { id = todoItem.Id },
                 todoItem);
         }
@@ -133,4 +129,7 @@ namespace MisaWebApi.Controllers
        _context.Process.Any(e => e.Id == id);
 
     }
+
+    //Get : search tên process
+
 }

@@ -27,10 +27,10 @@ namespace MisaWebApi.Controllers
 
         // GET: api/Phase/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Phase>> GetPhaseId(string id)
+        public ActionResult<Phase> GetPhaseId(string id)
         {
 
-            var phase = await _context.Phase.FindAsync(id);
+            var phase =  _context.Phase.Where(c => c.Id == id).Include(a => a.UsersHasPhase).SingleOrDefault();
             if (phase == null)
             {
                 return NotFound();
@@ -63,6 +63,7 @@ namespace MisaWebApi.Controllers
                 IsTc = phase.IsTc,
                 LimitUser = phase.LimitUser,
                 ProcessId = phase.ProcessId,
+                Index = phase.Index
             };
 
             _context.Phase.Add(newPhase);
@@ -89,6 +90,7 @@ namespace MisaWebApi.Controllers
                 IsTc = phase.IsTc,
                 LimitUser = phase.LimitUser,
                 ProcessId = phase.ProcessId,
+                Index = phase.Index
             };
 
             foreach (var a in phase.FieldData)
