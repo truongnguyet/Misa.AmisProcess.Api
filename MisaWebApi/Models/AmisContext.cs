@@ -27,6 +27,7 @@ namespace MisaWebApi.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseMySQL("server=amisprocess.cli3j8mtdaga.ap-northeast-1.rds.amazonaws.com;port=3306;user=nguyetmoon;password=nguyetmoon180499;database=Misa.amis;");
             }
         }
@@ -145,6 +146,10 @@ namespace MisaWebApi.Models
                     .HasColumnName("icon")
                     .HasMaxLength(45)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Index)
+                    .HasColumnName("index")
+                    .HasColumnType("int(11)");
 
                 entity.Property(e => e.IsFirstPhase)
                     .HasColumnName("isFirstPhase")
