@@ -49,31 +49,6 @@ namespace MisaWebApi.Controllers
                 .FirstOrDefault();
             return item;
         }
-        // POST: /Phase
-        [HttpPost("create")]
-        public async Task<ActionResult<Phase>> CreateTodoItem(Phase phase)
-        {
-            var newPhase = new Phase
-            {
-                PhaseName = phase.PhaseName,
-                Icon = phase.Icon,
-                Description = phase.Description,
-                IsFirstPhase = phase.IsFirstPhase,
-                IsTb = phase.IsTb,
-                IsTc = phase.IsTc,
-                LimitUser = phase.LimitUser,
-                ProcessId = phase.ProcessId,
-                Index = phase.Index
-            };
-
-            _context.Phase.Add(newPhase);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(
-                nameof(GetPhaseId),
-                new { id = newPhase.Id },
-                newPhase);
-        }
         //tạo phase bao gồm cả field, user và option
         [HttpPost("createAll")]
         public async Task<ActionResult<Phase>> Create(Phase phase)
@@ -165,55 +140,9 @@ namespace MisaWebApi.Controllers
             item.PhaseName = model.PhaseName;
             item.Icon = model.Icon;
             item.Description = model.Description;
-            item.LimitUser = model.LimitUser;
+           // item.LimitUser = model.LimitUser;
 
-            foreach (var a in model.FieldData)
-            {
-                // tim cai field id nay da ton tai chua
-                var fieldItem = await _context.FieldData.FindAsync(a.Id);
-                // kiem tra da ton tai thi update 
-                if (fieldItem != null)
-                {
-                    // update
-                    fieldItem.FieldName = a.FieldName;
-                    fieldItem.Description = a.Description;
-                    fieldItem.Type = a.Type;
-                    fieldItem.Required = a.Required;
-                    foreach(var b in a.Option)
-                    {
-                        var optionItem = await _context.Option.FindAsync(b.Id);
-                        if(optionItem != null)
-                        {
-                            optionItem.Value = b.Value;
-                        } else
-                        {
-                            var newOption = new Models.Option
-                            {
-                                Id = b.Id,
-                                Value = b.Value,
-                                FieldDataId = b.FieldDataId
-                            };
-                            _context.Option.AddRange(newOption);
-                        }
-                    }
-                }
-                else
-                {
-                    // create new
-                    var newField = new FieldData
-                    {
-                        Id = a.Id,
-                        FieldName = a.FieldName,
-                        Description = a.Description,
-                        Type = a.Type,
-                        Required = a.Required,
-                        PhaseId = a.PhaseId,
-                    };
-                    _context.FieldData.AddRange(newField);
-                }
-            }
-
-                await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return item;
         }
 
@@ -286,6 +215,37 @@ namespace MisaWebApi.Controllers
             await _context.SaveChangesAsync();
             return item;
         }
+        //Sửa user trong phase
+        [HttpPut("editUser")]
+        public async Task<ActionResult<Phase>> PutUser([FromBody] PhaseDelete model)
+        {
+
+            var item = await _context.Phase.FirstOrDefaultAsync(x => x.Id.Equals(model.Id));
+
+            if (item == null) return NotFound();
+            foreach(var a in model.UsersHasPhase)
+            {
+                var userItem =  _context.UsersHasPhase.Where( x => x.PhaseId == a.PhaseId && x.UsersId == a.UsersId);
+                if(userItem == null)
+                {
+                    var newUserPhase = new UsersHasPhase
+                    {
+                        PhaseId = a.PhaseId,
+                        UsersId = a.UsersId
+                    };
+                    _context.UsersHasPhase.Add(newUserPhase);
+                }
+            }
+            foreach(var b in model.UserDelete)
+            {
+                var userDel = await _context.UsersHasPhase.FindAsync(b.UsersId, b.PhaseId);
+                 _context.UsersHasPhase.Remove(userDel);
+            }
+           
+            await _context.SaveChangesAsync();
+            
+            return item;
+        }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
@@ -305,7 +265,7 @@ namespace MisaWebApi.Controllers
 
         //Delete toàn bộ phase bao gồm cả field và user
         [HttpDelete("delete/{id}")]
-        public ActionResult<Phase> Delete(string id)
+        public async Task<ActionResult<Phase>> Delete(string id)
         {
             var item = _context.Phase.Where(c => c.Id.Equals(id)).SingleOrDefault();
             if (item == null)
@@ -316,11 +276,13 @@ namespace MisaWebApi.Controllers
             field.ForEach(d =>
            {
                var option = _context.Option.Where(a => a.FieldDataId == d.Id).ToList();
-               _context.RemoveRange(option);
+               _context.Option.RemoveRange(option);
            });
-            _context.RemoveRange(field);
-            _context.Remove(item);
-            _context.SaveChangesAsync();
+            _context.FieldData.RemoveRange(field);
+            var users = _context.UsersHasPhase.Where(a => a.PhaseId == id).ToList();
+            _context.UsersHasPhase.RemoveRange(users);
+            _context.Phase.Remove(item);
+            await _context.SaveChangesAsync();
             return item;
         }
 
