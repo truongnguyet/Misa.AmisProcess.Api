@@ -2,8 +2,7 @@
   "ExpandedNodes": [
     "",
     "\\MisaWebApi",
-    "\\MisaWebApi\\Controllers",
-    "\\MisaWebApi\\Entities"
+    "\\MisaWebApi\\Controllers"
   ],
   "SelectedNode": "\\MisaWebApi\\Controllers\\PhaseController.cs",
   "PreviewInSolutionExplorer": false

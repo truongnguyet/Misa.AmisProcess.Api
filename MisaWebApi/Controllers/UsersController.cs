@@ -7,44 +7,88 @@ using MisaWebApi;
 using System.Threading.Tasks;
 using System.Collections;
 using Microsoft.EntityFrameworkCore;
+using MisaWebApi.Helpers;
+using Microsoft.Extensions.Options;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using System;
+using AutoMapper;
+using System.Linq;
 
 namespace MisaWebApi.Controllers
 {
-   // [Authorize]
+    [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
         private IUserService _userService;
         private  AmisContext _context;
-        public UsersController(IUserService userService, AmisContext context)
+        
+        private readonly AppSettings _appSettings;
+        public UsersController(IUserService userService, AmisContext context, IOptions<AppSettings> appSettings)
         {
             _userService = userService;
             _context = context;
+            _appSettings = appSettings.Value;
         }
 
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate([FromBody]AuthenticateModel model)
+        {
+            var user = _userService.Authenticate(model.Username, model.Password);
 
+            if (user == null)
+                return BadRequest(new { message = "Username or password is incorrect" });
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+
+            // return basic user info and authentication token
+            return Ok(new
+            {
+                Id = user.Id,
+                Email = user.Email,
+                user.FirstName,
+                LastName = user.LastName,
+                Token = tokenString
+            });
+        }
         //[AllowAnonymous]
-        //[HttpPost("login")]
-        //public  IActionResult Login(Users model)
+        //[HttpPost("register")]
+        //public IActionResult Register([FromBody]Users model)
         //{
+        //    // map model to entity
+        //    var user = _mapper.Map<Users>(model);
 
-        //    //  var user = _userService.Authenticate(model.username, model.password);
-        //    //var users = _context.Users.ToListAsync();
-
-        //    //var result = await (from p in users
-        //    //         where (p.username == model.username && p.password == model.password)
-        //    //         select p
-        //    //              )
-        //    //             .ToListAsync();
-
-        //    //if (user == null)
-        //    //    return BadRequest(new { message = "username or password is incorrect" });
-        //    return "Hello";
+        //    try
+        //    {
+        //        // create user
+        //        _userService.Create(user, model.Password);
+        //        return Ok();
+        //    }
+        //    catch (AppException ex)
+        //    {
+        //        // return error message if there was an exception
+        //        return BadRequest(new { message = ex.Message });
+        //    }
         //}
-
         // GET: api/Users
-       
+
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -58,6 +102,11 @@ namespace MisaWebApi.Controllers
             return await _context.Users.ToListAsync();
         }
 
-
+        [HttpGet("{id}")]
+        public ActionResult<Users> GetById(string id)
+        {
+            var user = _context.Users.Where(a => a.Id == id).FirstOrDefault();
+            return user;
+        }
     }
 }

@@ -327,8 +327,6 @@ E:\ttnguyet\source\Misa.AmisProcess.Api\MisaWebApi\obj\Debug\netcoreapp3.1\MisaW
 E:\ttnguyet\source\Misa.AmisProcess.Api\MisaWebApi\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
 E:\ttnguyet\source\Misa.AmisProcess.Api\MisaWebApi\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 E:\ttnguyet\source\Misa.AmisProcess.Api\MisaWebApi\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
-E:\ttnguyet\source\Misa.AmisProcess.Api\MisaWebApi\obj\Debug\netcoreapp3.1\MisaWebApi.csproj.CoreCompileInputs.cache
-E:\ttnguyet\source\Misa.AmisProcess.Api\MisaWebApi\obj\Debug\netcoreapp3.1\MisaWebApi.MvcApplicationPartsAssemblyInfo.cache
 D:\MISA\source\Misa.AmisProcess.Api\MisaWebApi\bin\Debug\netcoreapp3.1\appsettings.Development.json
 D:\MISA\source\Misa.AmisProcess.Api\MisaWebApi\bin\Debug\netcoreapp3.1\appsettings.json
 D:\MISA\source\Misa.AmisProcess.Api\MisaWebApi\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
@@ -467,3 +465,6 @@ D:\MISA\source\Misa.AmisProcess.Api\MisaWebApi\obj\Debug\netcoreapp3.1\staticweb
 D:\MISA\source\Misa.AmisProcess.Api\MisaWebApi\obj\Debug\netcoreapp3.1\MisaWebApi.dll
 D:\MISA\source\Misa.AmisProcess.Api\MisaWebApi\obj\Debug\netcoreapp3.1\MisaWebApi.pdb
 D:\MISA\source\Misa.AmisProcess.Api\MisaWebApi\obj\Debug\netcoreapp3.1\MisaWebApi.genruntimeconfig.cache
+E:\ttnguyet\source\Misa.AmisProcess.Api\MisaWebApi\obj\Debug\netcoreapp3.1\MisaWebApi.csproj.CoreCompileInputs.cache
+E:\ttnguyet\source\Misa.AmisProcess.Api\MisaWebApi\obj\Debug\netcoreapp3.1\MisaWebApi.MvcApplicationPartsAssemblyInfo.cache
+E:\ttnguyet\source\Misa.AmisProcess.Api\MisaWebApi\bin\Debug\netcoreapp3.1\AutoMapper.dll

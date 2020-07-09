@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using MisaWebApi.Models;
 using Microsoft.Extensions.Options;
+using System.Threading.Tasks;
 
 namespace MisaWebApi
 {
@@ -26,13 +27,14 @@ namespace MisaWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //connect with MySql
             var sqlConnectionString = Configuration.GetConnectionString("MySqlConnection");
             services.AddDbContext<AmisContext>(options =>
               options.UseMySQL(sqlConnectionString)
           );
             services.AddCors();
             services.AddControllers();
-
+           
             services.AddControllersWithViews()
             .AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
@@ -50,6 +52,21 @@ namespace MisaWebApi
             })
             .AddJwtBearer(x =>
             {
+                x.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = context =>
+                    {
+                        var userService = context.HttpContext.RequestServices.GetRequiredService<IUserService>();
+                        var userId = context.Principal.Identity.Name;
+                        var user = userService.GetById(userId);
+                        if (user == null)
+                        {
+                            // return unauthorized if user no longer exists
+                            context.Fail("Unauthorized");
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
                 x.TokenValidationParameters = new TokenValidationParameters

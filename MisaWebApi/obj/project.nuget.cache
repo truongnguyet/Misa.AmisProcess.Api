@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "in9dJbJJabVHdA7lWWIqrSa1N8k5PxNyQ+UvFOPOqi8+ZOtbvTG+aWC8EE0Ijo1E0L8eafBfw4z2v9EvocAKlw==",
+  "dgSpecHash": "Czq40U+MCX1nv+hPE9Fv7nsKNE67VnRIXkCudK5GUYVZ9NJ8ZSp390y1NTPLeBBNt62F+bIXdrjkkFBzltwyww==",
   "success": true,
   "projectFilePath": "E:\\ttnguyet\\source\\Misa.AmisProcess.Api\\MisaWebApi\\MisaWebApi.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ttnguyet\\.nuget\\packages\\automapper\\10.0.0\\automapper.10.0.0.nupkg.sha512",
     "C:\\Users\\ttnguyet\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
     "C:\\Users\\ttnguyet\\.nuget\\packages\\google.protobuf\\3.6.1\\google.protobuf.3.6.1.nupkg.sha512",
     "C:\\Users\\ttnguyet\\.nuget\\packages\\k4os.compression.lz4\\1.1.11\\k4os.compression.lz4.1.1.11.nupkg.sha512",
@@ -103,7 +104,7 @@
     "C:\\Users\\ttnguyet\\.nuget\\packages\\system.net.sockets\\4.1.0\\system.net.sockets.4.1.0.nupkg.sha512",
     "C:\\Users\\ttnguyet\\.nuget\\packages\\system.objectmodel\\4.3.0\\system.objectmodel.4.3.0.nupkg.sha512",
     "C:\\Users\\ttnguyet\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
-    "C:\\Users\\ttnguyet\\.nuget\\packages\\system.reflection.emit\\4.3.0\\system.reflection.emit.4.3.0.nupkg.sha512",
+    "C:\\Users\\ttnguyet\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
     "C:\\Users\\ttnguyet\\.nuget\\packages\\system.reflection.emit.ilgeneration\\4.3.0\\system.reflection.emit.ilgeneration.4.3.0.nupkg.sha512",
     "C:\\Users\\ttnguyet\\.nuget\\packages\\system.reflection.emit.lightweight\\4.3.0\\system.reflection.emit.lightweight.4.3.0.nupkg.sha512",
     "C:\\Users\\ttnguyet\\.nuget\\packages\\system.reflection.extensions\\4.3.0\\system.reflection.extensions.4.3.0.nupkg.sha512",

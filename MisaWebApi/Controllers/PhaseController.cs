@@ -225,7 +225,7 @@ namespace MisaWebApi.Controllers
             if (item == null) return NotFound();
             foreach(var a in model.UsersHasPhase)
             {
-                var userItem =  _context.UsersHasPhase.Where( x => x.PhaseId == a.PhaseId && x.UsersId == a.UsersId);
+                var userItem = _context.UsersHasPhase.Where(x => x.PhaseId == a.PhaseId && x.UsersId == a.UsersId).FirstOrDefault();
                 if(userItem == null)
                 {
                     var newUserPhase = new UsersHasPhase
@@ -238,7 +238,7 @@ namespace MisaWebApi.Controllers
             }
             foreach(var b in model.UserDelete)
             {
-                var userDel = await _context.UsersHasPhase.FindAsync(b.UsersId, b.PhaseId);
+                var userDel = _context.UsersHasPhase.Where(x => x.PhaseId == b.PhaseId && x.UsersId == b.UsersId).FirstOrDefault();
                  _context.UsersHasPhase.Remove(userDel);
             }
            
