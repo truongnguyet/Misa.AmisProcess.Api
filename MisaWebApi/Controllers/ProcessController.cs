@@ -45,6 +45,25 @@ namespace MisaWebApi.Controllers
           
             return result;
         }
+        //Seacrh and pagination
+        [HttpGet("{index}/{searchText}")]
+        public ActionResult<Page> ProcessSearch(int index,string searchText)
+        {
+            var perPage = 10;
+            var item = _context.Process.Where(x => x.NameProcess.ToUpper().Contains(searchText.ToUpper())).ToList();
+            var todoItem =  item.Skip(perPage * index).Take(perPage).ToList();   
+            var countDetails = item.Count();
+
+            var result = new Page
+            {
+                Count = countDetails,
+                PageIndex = 1,
+                PageSize = perPage,
+                Items = todoItem
+            };
+
+            return result;
+        }
 
         //Get ca phase va field,user
         [HttpGet("{id}/get")]

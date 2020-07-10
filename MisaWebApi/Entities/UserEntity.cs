@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace MisaWebApi.Models
+namespace MisaWebApi.Entities
 {
-    public partial class Users
+    public class UserEntity
     {
-        public Users()
-        {
-            UsersHasPhase = new HashSet<UsersHasPhase>();
-            UsersHasProcess = new HashSet<UsersHasProcess>();
-        }
-
         public string Id { get; set; }
         public string FullName { get; set; }
         public string LastName { get; set; }
@@ -21,10 +17,7 @@ namespace MisaWebApi.Models
         public string Position { get; set; }
         public string Role { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public string PasswordHash { get; set; }
-        public string PasswordSalt { get; set; }
-
-        public virtual ICollection<UsersHasPhase> UsersHasPhase { get; set; }
-        public virtual ICollection<UsersHasProcess> UsersHasProcess { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
     }
 }

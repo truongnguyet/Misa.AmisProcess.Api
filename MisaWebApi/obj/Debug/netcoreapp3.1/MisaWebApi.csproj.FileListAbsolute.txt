@@ -465,6 +465,7 @@ D:\MISA\source\Misa.AmisProcess.Api\MisaWebApi\obj\Debug\netcoreapp3.1\staticweb
 D:\MISA\source\Misa.AmisProcess.Api\MisaWebApi\obj\Debug\netcoreapp3.1\MisaWebApi.dll
 D:\MISA\source\Misa.AmisProcess.Api\MisaWebApi\obj\Debug\netcoreapp3.1\MisaWebApi.pdb
 D:\MISA\source\Misa.AmisProcess.Api\MisaWebApi\obj\Debug\netcoreapp3.1\MisaWebApi.genruntimeconfig.cache
+E:\ttnguyet\source\Misa.AmisProcess.Api\MisaWebApi\bin\Debug\netcoreapp3.1\AutoMapper.dll
+E:\ttnguyet\source\Misa.AmisProcess.Api\MisaWebApi\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 E:\ttnguyet\source\Misa.AmisProcess.Api\MisaWebApi\obj\Debug\netcoreapp3.1\MisaWebApi.csproj.CoreCompileInputs.cache
 E:\ttnguyet\source\Misa.AmisProcess.Api\MisaWebApi\obj\Debug\netcoreapp3.1\MisaWebApi.MvcApplicationPartsAssemblyInfo.cache
-E:\ttnguyet\source\Misa.AmisProcess.Api\MisaWebApi\bin\Debug\netcoreapp3.1\AutoMapper.dll

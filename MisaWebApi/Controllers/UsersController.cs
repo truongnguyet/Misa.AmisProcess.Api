@@ -16,6 +16,7 @@ using System.Security.Claims;
 using System;
 using AutoMapper;
 using System.Linq;
+using MisaWebApi.Entities;
 
 namespace MisaWebApi.Controllers
 {
@@ -26,13 +27,15 @@ namespace MisaWebApi.Controllers
     {
         private IUserService _userService;
         private  AmisContext _context;
-        
+        private IMapper _mapper;
+
         private readonly AppSettings _appSettings;
-        public UsersController(IUserService userService, AmisContext context, IOptions<AppSettings> appSettings)
+        public UsersController(IUserService userService, AmisContext context,IMapper mapper, IOptions<AppSettings> appSettings)
         {
             _userService = userService;
             _context = context;
             _appSettings = appSettings.Value;
+            _mapper = mapper;
         }
 
         [AllowAnonymous]
@@ -68,25 +71,24 @@ namespace MisaWebApi.Controllers
                 Token = tokenString
             });
         }
-        //[AllowAnonymous]
-        //[HttpPost("register")]
-        //public IActionResult Register([FromBody]Users model)
-        //{
-        //    // map model to entity
-        //    var user = _mapper.Map<Users>(model);
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public IActionResult Register([FromBody]RegisterModel model)
+        {
+            var user = _mapper.Map<UserEntity>(model);
+            try
+            {
+                // create user
+                _userService.Create(user, model.Password);
+                return Ok();
+            }
+            catch (AppException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
-        //    try
-        //    {
-        //        // create user
-        //        _userService.Create(user, model.Password);
-        //        return Ok();
-        //    }
-        //    catch (AppException ex)
-        //    {
-        //        // return error message if there was an exception
-        //        return BadRequest(new { message = ex.Message });
-        //    }
-        //}
         // GET: api/Users
 
         [HttpGet]

@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Czq40U+MCX1nv+hPE9Fv7nsKNE67VnRIXkCudK5GUYVZ9NJ8ZSp390y1NTPLeBBNt62F+bIXdrjkkFBzltwyww==",
+  "dgSpecHash": "IBOO2tioI/hj1wQ+ufw0KLICvfZ77JhWNZNf8yCdCfuW1a3qb6AJNXZkvMFTnjYIYn0Fuxa75CyJAU+iLKRszg==",
   "success": true,
   "projectFilePath": "E:\\ttnguyet\\source\\Misa.AmisProcess.Api\\MisaWebApi\\MisaWebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ttnguyet\\.nuget\\packages\\automapper\\10.0.0\\automapper.10.0.0.nupkg.sha512",
+    "C:\\Users\\ttnguyet\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.0.0\\automapper.extensions.microsoft.dependencyinjection.8.0.0.nupkg.sha512",
     "C:\\Users\\ttnguyet\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
     "C:\\Users\\ttnguyet\\.nuget\\packages\\google.protobuf\\3.6.1\\google.protobuf.3.6.1.nupkg.sha512",
     "C:\\Users\\ttnguyet\\.nuget\\packages\\k4os.compression.lz4\\1.1.11\\k4os.compression.lz4.1.1.11.nupkg.sha512",

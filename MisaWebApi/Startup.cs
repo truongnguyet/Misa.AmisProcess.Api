@@ -12,6 +12,8 @@ using System.Text;
 using MisaWebApi.Models;
 using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
+using AutoMapper;
+using System;
 
 namespace MisaWebApi
 {
@@ -34,6 +36,7 @@ namespace MisaWebApi
           );
             services.AddCors();
             services.AddControllers();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
            
             services.AddControllersWithViews()
             .AddNewtonsoftJson(options =>

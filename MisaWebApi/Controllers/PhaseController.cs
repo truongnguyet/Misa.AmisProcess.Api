@@ -233,13 +233,13 @@ namespace MisaWebApi.Controllers
                         PhaseId = a.PhaseId,
                         UsersId = a.UsersId
                     };
-                    _context.UsersHasPhase.Add(newUserPhase);
+                    _context.UsersHasPhase.AddRange(newUserPhase);
                 }
             }
             foreach(var b in model.UserDelete)
             {
                 var userDel = _context.UsersHasPhase.Where(x => x.PhaseId == b.PhaseId && x.UsersId == b.UsersId).FirstOrDefault();
-                 _context.UsersHasPhase.Remove(userDel);
+                 _context.UsersHasPhase.RemoveRange(userDel);
             }
            
             await _context.SaveChangesAsync();

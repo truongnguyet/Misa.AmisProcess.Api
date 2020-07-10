@@ -276,12 +276,16 @@ namespace MisaWebApi.Models
                     .HasMaxLength(45)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Password)
+                entity.Property(e => e.PasswordHash)
                     .IsRequired()
-                    .HasColumnName("password")
+                    .HasColumnName("passwordHash")
                     .HasMaxLength(45)
                     .IsUnicode(false);
-
+                entity.Property(e => e.PasswordSalt)
+                 .IsRequired()
+                 .HasColumnName("passwordSalt")
+                 .HasMaxLength(45)
+                 .IsUnicode(false);
                 entity.Property(e => e.PhoneNumber)
                     .IsRequired()
                     .HasColumnName("phoneNumber")
