@@ -119,6 +119,8 @@ namespace MisaWebApi.Controllers
             if (item == null) return NotFound();
             item.NameProcess = model.NameProcess;
             item.Status = model.Status;
+            item.ModifiedBy = model.ModifiedBy;
+            item.ModifiedAt = model.ModifiedAt;
 
             _context.Process.Update(item);
             _context.Entry(item).State = EntityState.Modified;

@@ -11,7 +11,7 @@ namespace MisaWebApi.Models
         }
 
         public string Id { get; set; }
-        
+        public byte LimitUser { get; set; }
 
         public virtual Process Process { get; set; }
         public virtual ICollection<UsersHasPhase> UsersHasPhase { get; set; }

@@ -125,23 +125,7 @@ namespace MisaWebApi.Controllers
             item.Icon = model.Icon;
             item.Description = model.Description;
             item.LimitUser = model.LimitUser;
-            await _context.SaveChangesAsync();
-            return item;
-        }
-        // PUT: api/Phase/edit
-        [HttpPut("editPhase")]
-        public async Task<ActionResult<Phase>> PutPhase([FromBody] Phase model)
-        {
-
-            var item = await _context.Phase.FirstOrDefaultAsync(x => x.Id.Equals(model.Id));
-
-            if (item == null) return NotFound();
-
-            item.PhaseName = model.PhaseName;
-            item.Icon = model.Icon;
-            item.Description = model.Description;
-           // item.LimitUser = model.LimitUser;
-
+            item.Index = model.Index;
             await _context.SaveChangesAsync();
             return item;
         }
@@ -219,10 +203,12 @@ namespace MisaWebApi.Controllers
         [HttpPut("editUser")]
         public async Task<ActionResult<Phase>> PutUser([FromBody] PhaseDelete model)
         {
-
+            //tìm phase cần sửa
             var item = await _context.Phase.FirstOrDefaultAsync(x => x.Id.Equals(model.Id));
-
+            //check phase khác null
             if (item == null) return NotFound();
+            //sửa lại limitUser
+            item.LimitUser = model.LimitUser;
             foreach(var a in model.UsersHasPhase)
             {
                 var userItem = _context.UsersHasPhase.Where(x => x.PhaseId == a.PhaseId && x.UsersId == a.UsersId).FirstOrDefault();
