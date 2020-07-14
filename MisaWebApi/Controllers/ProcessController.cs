@@ -1,9 +1,7 @@
-﻿using System;
+﻿
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MisaWebApi.Models;
 using Microsoft.EntityFrameworkCore;
@@ -150,7 +148,5 @@ namespace MisaWebApi.Controllers
        _context.Process.Any(e => e.Id == id);
 
     }
-
-    //Get : search tên process
 
 }

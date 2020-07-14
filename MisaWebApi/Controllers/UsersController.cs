@@ -26,11 +26,11 @@ namespace MisaWebApi.Controllers
     public class UsersController : ControllerBase
     {
         private IUserService _userService;
-        private  AmisContext _context;
+        private AmisContext _context;
         private IMapper _mapper;
 
         private readonly AppSettings _appSettings;
-        public UsersController(IUserService userService, AmisContext context,IMapper mapper, IOptions<AppSettings> appSettings)
+        public UsersController(IUserService userService, AmisContext context, IMapper mapper, IOptions<AppSettings> appSettings)
         {
             _userService = userService;
             _context = context;
@@ -64,10 +64,10 @@ namespace MisaWebApi.Controllers
             // return basic user info and authentication token
             return Ok(new
             {
-                Id = user.Id,
-                Email = user.Email,
+                user.Id,
+                user.Email,
                 user.FirstName,
-                LastName = user.LastName,
+                user.LastName,
                 Token = tokenString
             });
         }
